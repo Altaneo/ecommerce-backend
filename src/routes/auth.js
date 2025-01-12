@@ -1,0 +1,14 @@
+const express = require('express');
+const router = express.Router();
+const authController = require('../controllers/authController');
+router.post('/send-otp', authController.sendOtp);
+router.post('/verify-otp', authController.verifyOtp);
+router.post('/check-user', authController.checkUser);
+router.post('/save-user', authController.saveUser);
+router.post('/sign-out', authController.signOut); 
+router.get('/check-auth', authController.checkAuth);
+router.post('/verifyAuth-token', authController.verifyFirebaseToken);
+router.get('/profile', authController.checkAuthMiddleware,authController.fetchUserProfile);
+router.put('/profileUpdate', authController.updateUserProfile);
+router.post('/verify-phoneUser', authController.verifyPhoneUser);
+module.exports = router;
