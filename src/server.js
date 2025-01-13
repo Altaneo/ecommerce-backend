@@ -84,12 +84,27 @@ app.get('/api/live-stream', async (req, res) => {
   const youtube = google.youtube({ version: 'v3', auth: 'AIzaSyDuXur_2n49Y16SeOu_i8b8LdQJgqJQhUw' });
 
   try {
-      const response = await youtube.search.list({
-          part: 'snippet',
-          channelId: "UCoHCXJfVz-iJ4NeseTOZ3Gg",
-          type: 'video',
-      });
-      res.json(response.data.items);
+    const liveResponse = await youtube.search.list({
+      part: 'snippet',
+      channelId: "UCoHCXJfVz-iJ4NeseTOZ3Gg",
+      type: 'video',
+      eventType: 'live',
+    });
+    
+    // Fetch upcoming events
+    const upcomingResponse = await youtube.search.list({
+      part: 'snippet',
+      channelId: "UCoHCXJfVz-iJ4NeseTOZ3Gg",
+      type: 'video',
+      eventType: 'upcoming',
+    });
+    
+    // Combine the results
+    const combinedResults = [
+      ...liveResponse.data.items,
+      ...upcomingResponse.data.items,
+    ];
+      res.json(combinedResults);
   } catch (err) {
       res.status(500).send('Error fetching channel live streams: ' + err.message);
   }
