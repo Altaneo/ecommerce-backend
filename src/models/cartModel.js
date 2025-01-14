@@ -8,7 +8,9 @@ const cartSchema = new mongoose.Schema({
   image: { type: String, required: true },
   category: { type: String },
   rating: { type: Number },
-  user: { type: mongoose.Schema.Types.ObjectId, ref: 'User' }, // Reference to User
+  user: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
+  stage: { type: String },
+  quntity: { type: Number },
 });
 
 const Cart = mongoose.model('Cart', cartSchema);

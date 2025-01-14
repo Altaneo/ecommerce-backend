@@ -236,13 +236,22 @@ exports.fetchUserProfile = async (req, res) => {
   }
 };
 exports.updateUserProfile = async (req, res) => {
-  const { name, gender, address, email, phone, uid } = req.body;
+  const { name, gender, email, phone, uid, addresses } = req.body; // Updated to include addresses
 
   try {
-    const updatedUser = await userService.updateUser(uid, { name, gender, email, phone, address });
+    // Ensure that the user exists and is updated with the new data
+    const updatedUser = await userService.updateUser(uid, { 
+      name, 
+      gender, 
+      email, 
+      phone, 
+      addresses // Include addresses array
+    });
+
     if (!updatedUser) {
       return res.status(404).json({ message: 'User not found' });
     }
+    
     res.status(200).json({
       message: 'Profile updated successfully',
       user: updatedUser,
@@ -262,7 +271,7 @@ exports.verifyPhoneUser = async(req, res) => {
   const user = await User.findOne({phone:user_json_phone});
     // Save the user if user is null or if email and name are provided
     if (!user) {
-        const newUser = new User({email:'',phone:user_json_phone});
+        const newUser = new User({email:'', phone:user_json_phone});
         await newUser.save();
       }
   const jwtToken = jwt.sign({ user_json_phone }, JWT_SECRET, { expiresIn: '1h' });
