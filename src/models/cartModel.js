@@ -9,8 +9,23 @@ const cartSchema = new mongoose.Schema({
   category: { type: String },
   rating: { type: Number },
   user: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
-  stage: { type: String },
-  quntity: { type: Number },
+  stage: { 
+    type: String, 
+    enum: [
+      'None',
+      'AddedToCart',    
+      'PendingPayment',   
+      'PaymentCompleted',
+      'OrderConfirmed',
+      'Shipped',
+      'OutForDelivery',
+      'Delivered',
+      'Cancelled', 
+      'Returned',
+    ],
+    default: 'None' 
+  },
+  quantity: { type: Number, default: 1 },
 });
 
 const Cart = mongoose.model('Cart', cartSchema);
