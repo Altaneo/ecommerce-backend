@@ -10,8 +10,11 @@ const { google } = require('googleapis');
 const authRoutes = require('./routes/auth');
 const jwt = require('jsonwebtoken');
 const cartRoutes = require('./routes/cartRoutes');
+const productRoutes = require('./routes/productRoutes');
 const products = require('./Data/Data')
+const Product = require('./models/Product')
 const featureProducts = require('./Data/FeatureData')
+const notificationsRoutes = require("./routes/notificationsRoutes");
 const crypto = require('crypto');
 const url = require('url');
 dotenv.config();
@@ -111,13 +114,40 @@ app.get('/api/live-stream', async (req, res) => {
 });
 
 app.use('/api/cart', cartRoutes);
-app.get('/api/products', (req, res) => {
-  res.json(products.products);
+app.use('/api',productRoutes);
+// app.get('/api/products', (req, res) => {
+//   res.json(products.products);
+// });
+const saveProducts = async () => {
+  try {
+    for (const product of products.products) {
+      // Check if a product with the same unique identifier exists
+      const existingProduct = await Product.findOne({ uniqueField: product.uniqueField });
+
+      if (!existingProduct) {
+        await Product.create(product);
+      }
+    }
+    console.log('Product save operation completed');
+  } catch (err) {
+    console.error('Error saving products:', err);
+  }
+};
+
+saveProducts();
+app.get('/api/products', async (req, res) => {
+  try {
+    const products = await Product.find({});
+    res.json(products);
+  } catch (error) {
+    console.error('Error fetching products:', error);
+    res.status(500).json({ message: 'Failed to fetch products' });
+  }
 });
 app.get('/api/featureProducts', (req, res) => {
   res.json(featureProducts.featureProducts);
 });
-
+app.use("/notifications", notificationsRoutes);
 app.post('/create-order', async (req, res) => {
   const { amount } = req.body;
   const amountInPaise = parseInt(amount * 100, 10); // Convert to paise and ensure it's an integer

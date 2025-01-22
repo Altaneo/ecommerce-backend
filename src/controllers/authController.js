@@ -205,11 +205,9 @@ exports.updateProfile = async (req, res) => {
 };
 exports.checkAuthMiddleware = (req, res, next) => {
   const authToken = req.cookies.authToken;
-
   if (!authToken) {
     return res.status(401).json({ message: 'Authentication required' });
   }
-
   try {
     const decodedToken = jwt.verify(authToken, JWT_SECRET);
     req.user = { userId: decodedToken.email || decodedToken.user_json_phone || decodedToken.emailOrPhone };

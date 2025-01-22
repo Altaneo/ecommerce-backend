@@ -13,7 +13,16 @@ router.post('/add', async (req, res) => {
     res.status(500).json({ message: 'Failed to add product to cart', error });
   }
 });
-
+router.get('/total-quantity', async (req, res) => {
+  try {
+   const cartItems = await Cart.find();
+   const totalQuantity =cartItems.filter((item) => item.stage !== 'OrderConfirmed').reduce((total, item) => total + (item.quantity || 0), 0);
+    res.status(200).json({ totalQuantity: totalQuantity || 0 }); // Return total quantity or 0 if no items
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'An error occurred while fetching total quantity' });
+  }
+});
 // Get cart items (optional)
 router.get('/', async (req, res) => {
   try {
@@ -92,4 +101,7 @@ router.delete('/:productId', async (req, res) => {
       res.status(500).json({ message: 'Server error. Please try again later.' });
     }
   });  
+ 
+
+   
 module.exports = router;
