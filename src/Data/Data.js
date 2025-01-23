@@ -4,33 +4,39 @@ export const products = [
     name: 'Wireless Headphones',
     description: 'High-quality sound with noise-cancelling features.',
     price: 99,
+    stock:'In Stock',
     type: 'headphone',
     brand: 'boat',
     image: '/images/headphone.jpg',
     category: 'electronics',
     rating: 3,
+    stock:'In Stock',
   },
   {
     _id: '2',
     name: 'Smartphone',
     description: 'Latest smartphone with amazing features.',
     price: 799,
+    stock:'In Stock',
     type: 'phone',
     brand: 'iphone',
     image: '/images/iphone.jpg',
     category: 'electronics',
     rating: 4.7,
+    stock:'In Stock',
   },
   {
     _id: '3',
     name: 'Smartwatch',
     description: 'Track your health and fitness with this smartwatch.',
     price: 199,
+    stock:'In Stock',
     type: 'watch',
     brand: 'noise',
     image: '/images/watch1.jpg',
     category: 'electronics',
     rating: 2,
+    stock:'In Stock',
   },
   {
     _id: '4',
@@ -38,10 +44,12 @@ export const products = [
     description: 'Stylish leather jacket for all occasions.',
     price: 149,
     type: 'jacket',
+    stock:'In Stock',
     brand: 'leather',
     image: '/images/jacket1.jpg',
     category: 'fashion',
     rating: 4.6,
+    stock:'In Stock',
   },
   {
     _id: '5',
@@ -53,6 +61,7 @@ export const products = [
     image: '/images/shoes.jpg',
     category: 'fashion',
     rating: 4.2,
+    stock:'In Stock',
   },
   {
     _id: '6',
@@ -64,6 +73,7 @@ export const products = [
     image: '/images/sofa-set.jpg',
     category: 'home goods',
     rating: 4.8,
+    stock:'In Stock',
   },
   {
     _id: '7',
@@ -75,6 +85,7 @@ export const products = [
     image: '/images/coffee-table.jpg',
     category: 'home goods',
     rating: 4.4,
+    stock:'In Stock',
   },
   {
     _id: '8',
@@ -86,6 +97,7 @@ export const products = [
     image: '/images/makeup-kit.png',
     category: 'beauty',
     rating: 4.1,
+    stock:'In Stock',
   },
   {
     _id: '9',
@@ -97,6 +109,7 @@ export const products = [
     image: '/images/hair-dryer.png',
     category: 'beauty',
     rating: 2,
+    stock:'In Stock',
   },
   {
     _id: '10',
@@ -108,6 +121,7 @@ export const products = [
     image: '/images/face-cream.png',
     category: 'beauty',
     rating: 4.0,
+    stock:'In Stock',
   },
   {
     _id: '11',
@@ -119,6 +133,7 @@ export const products = [
     image: '/images/lip-balm.png',
     category: 'beauty',
     rating: 3,
+    stock:'In Stock',
   },
   {
     _id: '12',
@@ -130,6 +145,7 @@ export const products = [
     image: '/images/hand-cream.png',
     category: 'beauty',
     rating: 2,
+    stock:'In Stock',
   },
   {
     _id: '13',
@@ -141,6 +157,7 @@ export const products = [
     image: '/images/shampoo.jpg',
     category: 'beauty',
     rating: 4.2,
+    stock:'In Stock',
   },
   {
     _id: '14',
@@ -152,6 +169,7 @@ export const products = [
     image: '/images/conditioner.png',
     category: 'beauty',
     rating: 4.4,
+    stock:'In Stock',
   },
   {
     _id: '15',
@@ -163,6 +181,7 @@ export const products = [
     image: '/images/face-cream.png',
     category: 'beauty',
     rating: 4.1,
+    stock:'In Stock',
   },
   {
     _id: '16',
@@ -174,6 +193,7 @@ export const products = [
     image: '/images/body-lotion.jpg',
     category: 'beauty',
     rating: 4.6,
+    stock:'In Stock',
   },
   {
     _id: '17',
@@ -185,6 +205,7 @@ export const products = [
     image: '/images/eye-cream.png',
     category: 'beauty',
     rating: 2,
+    stock:'In Stock',
   },
   {
     _id: '18',
@@ -196,6 +217,7 @@ export const products = [
     image: '/images/makeup-remover.jpg',
     category: 'beauty',
     rating: 3,
+    stock:'In Stock',
   },
   {
     _id: '19',
@@ -207,6 +229,7 @@ export const products = [
     image: '/images/face-cream.png',
     category: 'beauty',
     rating: 4.7,
+    stock:'In Stock',
   },
   {
     _id: '20',
@@ -218,6 +241,7 @@ export const products = [
     image: '/images/armchair.png',
     category: 'home goods',
     rating: 4.6,
+    stock:'In Stock',
   },
   {
     "_id": "21",
@@ -228,7 +252,8 @@ export const products = [
     "brand": 'wodden',
     "image": "/images/bed-frame.png",
     "category": "home goods",
-    "rating": 4.7
+    "rating": 4.7,
+    "stock":'In Stock'
   },
   {
     "_id": "22",
@@ -239,7 +264,8 @@ export const products = [
     "price": 199,
     "image": "/images/tv-stand.jpg",
     "category": "home goods",
-    "rating": 3
+    "rating": 3,
+    "stock":'In Stock'
   },
   {
     "_id": "23",
@@ -250,7 +276,8 @@ export const products = [
     "brand": 'wodden',
     "image": "/images/side-table.jpg",
     "category": "home goods",
-    "rating": 2
+    "rating": 2,
+    "stock":'In Stock'
   },
   {
     "_id": "24",
@@ -261,7 +288,8 @@ export const products = [
     "brand": 'wodden',
     "image": "/images/side-table.jpg",
     "category": "home goods",
-    "rating": 4.6
+    "rating": 4.6,
+    "stock":'In Stock'
   },
   {
     "_id": "25",
@@ -272,7 +300,8 @@ export const products = [
     "brand": 'wodden',
     "image": "/images/wall-clock.jpg",
     "category": "home goods",
-    "rating": 4.4
+    "rating": 4.4,
+    "stock":'In Stock'
   },
   {
     "_id": "26",
@@ -283,7 +312,8 @@ export const products = [
     "brand": 'silk',
     "image": "/images/curtains.jpg",
     "category": "home goods",
-    "rating": 3
+    "rating": 3,
+    "stock":'In Stock'
   },
   {
     "_id": "27",
@@ -294,7 +324,8 @@ export const products = [
     "brand": 'velvet',
     "image": "/images/rug.jpg",
     "category": "home goods",
-    "rating": 4.7
+    "rating": 4.7,
+    "stock":'In Stock'
   },
   {
     "_id": "28",
@@ -305,7 +336,8 @@ export const products = [
     "brand": 'wodden',
     "image": "/images/wardrobe.jpg",
     "category": "home goods",
-    "rating": 4.8
+    "rating": 4.8,
+    "stock":'In Stock'
   },
   {
     "_id": "29",
@@ -316,7 +348,8 @@ export const products = [
     "brand": 'wodden',
     "image": "/images/floor-lamp.png",
     "category": "home goods",
-    "rating": 4.6
+    "rating": 4.6,
+    "stock":'In Stock'
   },
   {
     "_id": "30",
@@ -327,7 +360,8 @@ export const products = [
     "brand": 'wodden',
     "image": "/images/mirror.jpg",
     "category": "home goods",
-    "rating": 3
+    "rating": 3,
+    "stock":'In Stock'
   },
   {
     "_id": "31",
@@ -338,7 +372,8 @@ export const products = [
     "brand": 'wodden',
     "image": "/images/bookshelf.jpg",
     "category": "home goods",
-    "rating": 4.4
+    "rating": 4.4,
+    "stock":'In Stock'
   },
   {
     "_id": "32",
@@ -349,7 +384,8 @@ export const products = [
     "brand": 'wodden',
     "image": "/images/dining-chairs.jpg",
     "category": "home goods",
-    "rating": 4.7
+    "rating": 4.7,
+    "stock":'In Stock'
   },
   {
     "_id": "33",
@@ -360,7 +396,8 @@ export const products = [
     "brand": 'wodden',
     "image": "/images/throw-pillows.jpg",
     "category": "home goods",
-    "rating": 2
+    "rating": 2,
+    "stock":'In Stock'
   },
   {
     "_id": "34",
@@ -371,7 +408,8 @@ export const products = [
     "brand": 'plastic',
     "image": "/images/laundry-basket.jpg",
     "category": "home goods",
-    "rating": 3
+    "rating": 3,
+    "stock":'In Stock'
   },
   {
     "_id": "35",
@@ -382,7 +420,8 @@ export const products = [
     "brand": 'wodden',
     "image": "/images/kitchen-island.jpg",
     "category": "home goods",
-    "rating": 4.6
+    "rating": 4.6,
+    "stock":'In Stock'
   },
   {
     "_id": "36",
@@ -393,7 +432,8 @@ export const products = [
     "brand": 'wodden',
     "image": "/images/bar-stool.jpg",
     "category": "home goods",
-    "rating": 4.4
+    "rating": 4.4,
+    "stock":'In Stock'
   },
   {
     "_id": "37",
@@ -404,7 +444,8 @@ export const products = [
     "brand": 'wodden',
     "image": "/images/bedside-table.png",
     "category": "home goods",
-    "rating": 4.6
+    "rating": 4.6,
+    "stock":'In Stock'
   },
   {
     "_id": "38",
@@ -415,7 +456,8 @@ export const products = [
     "brand": 'wodden',
     "image": "/images/ottoman.png",
     "category": "home goods",
-    "rating": 3
+    "rating": 3,
+    "stock":'In Stock'
   },
   {
     "_id": "39",
@@ -426,7 +468,8 @@ export const products = [
     "brand": 'wodden',
     "image": "/images/ceiling-fan.jpg",
     "category": "home goods",
-    "rating": 3
+    "rating": 3,
+    "stock":'In Stock'
   },
   {
     "_id": "40",
@@ -437,7 +480,8 @@ export const products = [
     "brand": 'samsung',
     "image": "/images/smartphone.jpg",
     "category": "electronics",
-    "rating": 4.7
+    "rating": 4.7,
+    "stock":'Out Of Stock'
   },
   {
     _id: '41',
@@ -449,6 +493,7 @@ export const products = [
     image: '/images/laptop.jpg',
     category: 'electronics',
     rating: 4.6,
+    stock:'In Stock',
   },
   {
     _id: '42',
@@ -460,6 +505,7 @@ export const products = [
     image: '/images/smartwatch.png',
     category: 'electronics',
     rating: 3,
+    stock:'In Stock',
   },
   {
     _id: '43',
@@ -471,6 +517,7 @@ export const products = [
     image: '/images/bluetooth_speaker.png',
     category: 'electronics',
     rating: 4.4,
+    stock:'In Stock',
   },
   {
     _id: '44',
@@ -482,6 +529,7 @@ export const products = [
     image: '/images/tablet.jpg',
     category: 'electronics',
     rating: 4.6,
+    stock:'In Stock',
   },
   {
     _id: '45',
@@ -493,6 +541,7 @@ export const products = [
     image: '/images/gaming_console.png',
     category: 'electronics',
     rating: 4.8,
+    stock:'In Stock',
   },
   {
     _id: '46',
@@ -504,6 +553,7 @@ export const products = [
     image: '/images/wireless_earbuds.jpg',
     category: 'electronics',
     rating: 2,
+    stock:'In Stock',
   },
   {
     _id: '47',
@@ -515,6 +565,7 @@ export const products = [
     image: '/images/smart_tv.jpg',
     category: 'electronics',
     rating: 4.7,
+    stock:'In Stock',
   },
   {
     _id: '48',
@@ -526,6 +577,7 @@ export const products = [
     image: '/images/external_hard_drive.jpg',
     category: 'electronics',
     rating: 3,
+    stock:'In Stock',
   },
   {
     _id: '49',
@@ -537,6 +589,7 @@ export const products = [
     image: '/images/digital_camera.jpg',
     category: 'electronics',
     rating: 4.4,
+    stock:'In Stock',
   },
   {
     _id: '50',
@@ -548,6 +601,7 @@ export const products = [
     image: '/images/security_camera.jpg',
     category: 'electronics',
     rating: 4.6,
+    stock:'In Stock',
   },
   {
     _id: '60',
@@ -559,6 +613,7 @@ export const products = [
     image: '/images/slim_fit_jeans.jpg',
     category: 'fashion',
     rating: 2,
+    stock:'In Stock',
   },
   {
     _id: '61',
@@ -570,6 +625,7 @@ export const products = [
     image: '/images/silk_scarf.jpg',
     category: 'fashion',
     rating: 3,
+    stock:'In Stock',
   },
   {
     _id: '62',
@@ -581,6 +637,7 @@ export const products = [
     image: '/images/woolen_sweater.png',
     category: 'fashion',
     rating: 4.6,
+    stock:'In Stock',
   },
   {
     _id: '63',
@@ -592,6 +649,7 @@ export const products = [
     image: '/images/leather_boots.png',
     category: 'fashion',
     rating: 4.7,
+    stock:'In Stock',
   },
   {
     _id: '64',
@@ -603,6 +661,7 @@ export const products = [
     image: '/images/cotton_tshirt.jpg',
     category: 'fashion',
     rating: 4.4,
+    stock:'In Stock',
   },
   {
     _id: '65',
@@ -614,6 +673,7 @@ export const products = [
     image: '/images/summer_dress.jpg',
     category: 'fashion',
     rating: 3,
+    stock:'In Stock',
   },
   {
     _id: '66',
@@ -625,6 +685,7 @@ export const products = [
     image: '/images/sports_jacket.jpg',
     category: 'fashion',
     rating: 4.6,
+    stock:'In Stock',
   },
   {
     _id: '67',
@@ -636,6 +697,7 @@ export const products = [
     image: '/images/formal_blazer.jpg',
     category: 'fashion',
     rating: 4.7,
+    stock:'In Stock',
   },
   {
     _id: '68',
@@ -647,6 +709,7 @@ export const products = [
     image: '/images/casual_sneakers.png',
     category: 'fashion',
     rating: 3,
+    stock:'In Stock',
   },
   {
     _id: '69',
@@ -658,6 +721,7 @@ export const products = [
     image: '/images/leather_belt.jpg',
     category: 'fashion',
     rating: 4.6,
+    stock:'In Stock',
   },
   {
     _id: '70',
@@ -669,6 +733,7 @@ export const products = [
     image: '/images/woolen_hat.jpg',
     category: 'fashion',
     rating: 4.4,
+    stock:'In Stock',
   },
   {
     _id: '71',
@@ -680,5 +745,6 @@ export const products = [
     image: '/images/sunglasses.png',
     category: 'fashion',
     rating: 4.7,
+    stock:'In Stock',
   },
 ];

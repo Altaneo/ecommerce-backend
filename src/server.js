@@ -121,16 +121,18 @@ app.use('/api',productRoutes);
 const saveProducts = async () => {
   try {
     for (const product of products.products) {
-      // Check if a product with the same unique identifier exists
-      const existingProduct = await Product.findOne({ uniqueField: product.uniqueField });
-
-      if (!existingProduct) {
-        await Product.create(product);
-      }
+      // Use `findOneAndUpdate` to check and update the product if it exists, or create it if it doesn't
+      await Product.findOneAndUpdate(
+        { _id: product._id }, // Match based on the unique identifier
+        { $set: product }, // Update fields with the new product data
+        { upsert: true, new: true, runValidators: true } // Upsert ensures creation if not found, new returns updated doc, validators check schema
+      );
     }
-    console.log('Product save operation completed');
+
+    console.log('Product save or update operation completed successfully');
   } catch (err) {
-    console.error('Error saving products:', err);
+    // Log the error with meaningful context
+    console.error('Error saving or updating products:', err);
   }
 };
 
