@@ -9,6 +9,7 @@ export const featureProducts = [
     image: '/images/headphone.jpg',
     category: 'electronics',
     rating: 3,
+     stock:'In Stock',
   },
   {
     _id: '2',
@@ -20,6 +21,7 @@ export const featureProducts = [
     image: '/images/iphone.jpg',
     category: 'electronics',
     rating: 4.7,
+    stock:'In Stock',
   },
   {
     _id: '3',
@@ -31,6 +33,7 @@ export const featureProducts = [
     image: '/images/watch1.jpg',
     category: 'electronics',
     rating: 2,
+     stock:'In Stock',
   },
   {
     _id: '4',
@@ -42,6 +45,7 @@ export const featureProducts = [
     image: '/images/jacket1.jpg',
     category: 'fashion',
     rating: 4.6,
+     stock:'In Stock',
   },
   {
     _id: '5',
@@ -53,6 +57,7 @@ export const featureProducts = [
     image: '/images/shoes.jpg',
     category: 'fashion',
     rating: 4.2,
+     stock:'In Stock',
   },
   {
     _id: '6',
@@ -64,6 +69,7 @@ export const featureProducts = [
     image: '/images/sofa-set.jpg',
     category: 'home goods',
     rating: 4.8,
+     stock:'In Stock',
   },
   {
     _id: '7',
@@ -75,6 +81,7 @@ export const featureProducts = [
     image: '/images/coffee-table.jpg',
     category: 'home goods',
     rating: 4.4,
+     stock:'In Stock',
   },
   {
     _id: '8',
@@ -84,6 +91,7 @@ export const featureProducts = [
     image: '/images/makeup-kit.png',
     category: 'beauty',
     rating: 4.1,
+     stock:'In Stock',
   },
   {
     _id: '9',
@@ -93,6 +101,7 @@ export const featureProducts = [
     image: '/images/hair-dryer.png',
     category: 'beauty',
     rating: 2,
+     stock:'In Stock',
   },
   {
     _id: '10',
@@ -102,6 +111,7 @@ export const featureProducts = [
     image: '/images/face-cream.png',
     category: 'beauty',
     rating: 4.0,
+     stock:'In Stock',
   },
   {
     _id: '11',
@@ -111,6 +121,7 @@ export const featureProducts = [
     image: '/images/lip-balm.png',
     category: 'beauty',
     rating: 3,
+     stock:'In Stock',
   },
   {
     _id: '12',
@@ -120,6 +131,7 @@ export const featureProducts = [
     image: '/images/hand-cream.png',
     category: 'beauty',
     rating: 2,
+     stock:'In Stock',
   },
   {
     _id: '13',
@@ -129,6 +141,7 @@ export const featureProducts = [
     image: '/images/shampoo.jpg',
     category: 'beauty',
     rating: 4.2,
+     stock:'In Stock',
   },
   {
     _id: '14',
@@ -138,6 +151,7 @@ export const featureProducts = [
     image: '/images/conditioner.png',
     category: 'beauty',
     rating: 4.4,
+     stock:'In Stock',
   },
   {
     _id: '15',
@@ -147,6 +161,7 @@ export const featureProducts = [
     image: '/images/face-cream.png',
     category: 'beauty',
     rating: 4.1,
+     stock:'In Stock',
   },
   {
     _id: '16',
@@ -156,6 +171,7 @@ export const featureProducts = [
     image: '/images/body-lotion.jpg',
     category: 'beauty',
     rating: 4.6,
+     stock:'In Stock',
   },
   {
     _id: '17',
@@ -165,6 +181,7 @@ export const featureProducts = [
     image: '/images/eye-cream.png',
     category: 'beauty',
     rating: 2,
+     stock:'In Stock',
   },
   {
     _id: '18',
@@ -174,6 +191,7 @@ export const featureProducts = [
     image: '/images/makeup-remover.jpg',
     category: 'beauty',
     rating: 3,
+     stock:'In Stock',
   },
   {
     _id: '19',
@@ -183,6 +201,7 @@ export const featureProducts = [
     image: '/images/face-cream.png',
     category: 'beauty',
     rating: 4.7,
+     stock:'In Stock',
   },
   {
     _id: '20',
@@ -192,6 +211,7 @@ export const featureProducts = [
     image: '/images/armchair.png',
     category: 'home goods',
     rating: 4.6,
+     stock:'In Stock',
   },
   {
     "_id": "21",
@@ -200,6 +220,7 @@ export const featureProducts = [
     "price": 499,
     "image": "/images/bed-frame.png",
     "category": "home goods",
+    "stock":'In Stock',
     "rating": 4.7
   },
   {
@@ -209,6 +230,7 @@ export const featureProducts = [
     "price": 199,
     "image": "/images/tv-stand.jpg",
     "category": "home goods",
+    "stock":'In Stock',
     "rating": 3
   },
   {
@@ -218,6 +240,7 @@ export const featureProducts = [
     "price": 99,
     "image": "/images/side-table.jpg",
     "category": "home goods",
+    "stock":'In Stock',
     "rating": 2
   },
   {
@@ -227,6 +250,7 @@ export const featureProducts = [
     "price": 39,
     "image": "/images/side-table.jpg",
     "category": "home goods",
+    "stock":'Out Of Stock',
     "rating": 4.6
   },
   {
@@ -236,6 +260,7 @@ export const featureProducts = [
     "price": 49,
     "image": "/images/wall-clock.jpg",
     "category": "home goods",
+    "stock":'In Stock',
     "rating": 4.4
   },
   {
@@ -245,6 +270,7 @@ export const featureProducts = [
     "price": 79,
     "image": "/images/curtains.jpg",
     "category": "home goods",
+    "stock":'In Stock',
     "rating": 3
   },
   {
@@ -253,6 +279,7 @@ export const featureProducts = [
     "description": "Soft and durable area rug.",
     "price": 149,
     "image": "/images/rug.jpg",
+    "stock":'In Stock',
     "category": "home goods",
     "rating": 4.7
   }
