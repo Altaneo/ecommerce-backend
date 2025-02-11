@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const productSchema = new mongoose.Schema({
-  _id: { type: String, required: true }, // Custom ID (like '10')
+  _id: {  type: String, required: true }, // Custom ID (like '10')
   name: { type: String, required: true },
   description: { type: String, required: true },
   price: { type: Number, required: true },

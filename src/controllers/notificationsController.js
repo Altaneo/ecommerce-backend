@@ -1,5 +1,5 @@
 // controllers/notificationsController.js
-
+const Notification = require('../models/Notification');
 let notifications = [
     {
       id: 1,
@@ -20,17 +20,28 @@ let notifications = [
   ];
   
   // Get all notifications
-  const getAllNotifications = (req, res) => {
-    const unreadCount = notifications.filter((notification) => !notification.read).length;
-
-    const response = {
-      count: notifications.length, // Total notifications
-      unreadCount, // Count of unread notifications
-      notifications, // Array of notifications
-    };
+  const getAllNotifications = async (req, res) => {
+    try {
+      // Fetch all notifications from the database
+      const notifications = await Notification.find();
   
-    res.status(200).json(response);
+      // Count unread notifications
+      const unreadCount = notifications.filter((notification) => !notification.read).length;
+  
+      // Create response object
+      const response = {
+        count: notifications.length, // Total notifications
+        unreadCount, // Count of unread notifications
+        notifications, // Array of notifications
+      };
+  
+      res.status(200).json(response);
+    } catch (error) {
+      console.error("Error fetching notifications:", error);
+      res.status(500).json({ message: "Server error" });
+    }
   };
+  
   
   // Mark a notification as read
   const markAsRead = (req, res) => {
@@ -46,24 +57,27 @@ let notifications = [
   };
   
   // Add a new notification
-  const addNotification = (req, res) => {
-    const { title, message, type } = req.body;
+  const addNotification = async (req, res) => {
+    try {
+      const { title, message, type } = req.body;
+      
+      if (!title || !message || !type) {
+        return res.status(400).json({ message: "All fields are required" });
+      }
   
-    if (!title || !message || !type) {
-      return res.status(400).json({ message: "All fields are required" });
+      const newNotification = new Notification({
+        title,
+        message,
+        type,
+      });
+  
+      await newNotification.save(); // Save to MongoDB
+  
+      res.status(201).json(newNotification);
+    } catch (error) {
+      console.error("Error saving notification:", error);
+      res.status(500).json({ message: "Server error" });
     }
-  
-    const newNotification = {
-      id: notifications.length + 1,
-      title,
-      message,
-      type,
-      timestamp: new Date().toISOString(),
-      read: false,
-    };
-  
-    notifications.push(newNotification);
-    res.status(201).json(newNotification);
   };
   
   // Delete a notification

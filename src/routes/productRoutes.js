@@ -1,5 +1,7 @@
 const express = require('express');
 const Product = require('../models/Product');
+const multer = require("multer");
+const path = require("path");
 const userService = require('../services/userService');
 const { checkAuthMiddleware } = require('../controllers/authController');
 const router = express.Router();
@@ -63,5 +65,55 @@ router.post('/products/:productId/reviews',checkAuthMiddleware, async (req, res)
     res.status(500).json({ message: 'Internal Server Error' });
   }
 });
+
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, "uploads/"); // Ensure this folder exists in your project
+  },
+  filename: (req, file, cb) => {
+    cb(null, `${Date.now()}_${file.originalname}`);
+  },
+});
+
+const upload = multer({ storage: storage });
+router.post("/add", upload.array("images", 5), async (req, res) => {
+  try {
+    let products = req.body.products;
+
+    if (!products) {
+      return res.status(400).json({ message: "No products provided." });
+    }
+
+    products = JSON.parse(products); // Convert stringified JSON (fixes the issue)
+
+    console.log(products, "----- parsed products");
+
+    // Handle image uploads (if needed)
+    const uploadedImages = req.files ? req.files.map((file) => `/uploads/${file.filename}`) : [];
+
+    // Assign images properly (if uploaded)
+    const formattedProducts = products.map((product, index) => ({
+      _id: product._id || new Date().getTime().toString(),
+      name: product.name,
+      description: product.description,
+      price: Number(product.price),
+      stock: product.stock,
+      type: product.type,
+      brand: product.brand,
+      image: uploadedImages[index] || product.image || "", // Use uploaded image if available
+      category: product.category,
+      rating: product.rating || 0,
+    }));
+
+    // Save to DB
+    const savedProducts = await Product.insertMany(formattedProducts);
+
+    res.status(201).json({ message: "Products added successfully", products: savedProducts });
+  } catch (error) {
+    console.error("Error adding products:", error);
+    res.status(500).json({ message: "Internal Server Error" });
+  }
+});
+
 
 module.exports = router;

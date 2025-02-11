@@ -15,11 +15,15 @@ exports.findUser = async (emailOrPhone) => {
 // Save new user to the database
 exports.saveUser = async (userData) => {
   try {
-    const user = new User(userData);
-    await user.save();  // Save the new user to the database
+    const user = new User({
+      ...userData,
+    });
+
+    await user.save(); // Save the new user to the database
     return user;
   } catch (error) {
-    throw new Error('Error saving user');
+    console.error("Error saving user:", error);
+    throw new Error("Error saving user");
   }
 };
 exports.updateUser = async (userId, updates) => {
@@ -48,17 +52,5 @@ exports.fetchUserById = async (userId) => {
   } catch (error) {
     console.error('Error fetching user:', error);
     throw new Error('Error fetching user');
-  }
-};
-exports.findUser = async (emailOrPhone) => {
-  try {
-    const user = await User.findOne({
-      $or: [{ email: emailOrPhone }, { phone: emailOrPhone }],
-    });
-    // Return an empty string if user is not found
-    return user || ""; 
-  } catch (error) {
-    console.error('Error finding user:', error);
-    throw new Error('Error finding user');
   }
 };

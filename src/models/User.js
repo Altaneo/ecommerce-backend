@@ -16,8 +16,16 @@ const UserSchema = new mongoose.Schema({
   phone: String,
   name: String,
   gender: String,
-  addresses: [AddressSchema], // Changed to an array of addresses
+  bio: String,
+  addresses: [AddressSchema],
+   livestreams: [{ type: mongoose.Schema.Types.ObjectId, ref: "Livestream" }] ,
+  profilePicture: { type: String, default: "" }, // Changed to an array of addresses
   inviteCode: String,
+  role: { 
+    type: String, 
+    enum: ["influencer", "customer", "admin"], 
+    default: "customer" 
+  },
   cart: [
     {
       productId: { type: String, required: true },
