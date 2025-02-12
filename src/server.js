@@ -321,16 +321,6 @@ app.post("/start-stream", upload.single("thumbnail"), async (req, res) => {
 
     oauth2Client.setCredentials(req.session.tokens);
     const youtube = google.youtube("v3");
-
-    console.log(
-      selectedStartTime,
-      new Date(scheduledStartTime),
-      new Date().toISOString(),
-      thumbnailPath,
-      "-----------scheduledStartTime.toISOString()"
-    );
-
-    // Create live broadcast
     const requestBody = {
       snippet: {
         title: title || "Default Title",
@@ -434,7 +424,6 @@ app.get("/get-live-chat/:broadcastId", async (req, res) => {
     });
 
     const liveChatId = broadcast.data.items[0]?.snippet?.liveChatId;
-    console.log(liveChatId,"----------")
     if (!liveChatId) {
       return res.status(404).json({ error: "No live chat found" });
     }
@@ -531,7 +520,6 @@ app.get("/api/check-live-status/:broadcastId", async (req, res) => {
       });
 
       const broadcast = response.data.items[0];
-      console.log(response,"----------response")
       if (!broadcast) {
           return res.status(404).json({ error: "Broadcast not found" });
       }
@@ -548,7 +536,6 @@ app.get("/api/check-live-status/:broadcastId", async (req, res) => {
 
 // WebSocket
 io.on("connection", (socket) => {
-  console.log(socket,"---------")
   console.log("New client connected");
   socket.on("join", (roomId) => {
     socket.join(roomId);

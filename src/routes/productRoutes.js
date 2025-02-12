@@ -86,8 +86,6 @@ router.post("/add", upload.array("images", 5), async (req, res) => {
 
     products = JSON.parse(products); // Convert stringified JSON (fixes the issue)
 
-    console.log(products, "----- parsed products");
-
     // Handle image uploads (if needed)
     const uploadedImages = req.files ? req.files.map((file) => `/uploads/${file.filename}`) : [];
 
