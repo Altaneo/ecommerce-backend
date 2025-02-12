@@ -79,6 +79,7 @@ router.get("/:streamId", async (req, res) => {
 router.get("/", async (req, res) => {
   try {
     const liveStreams = await Livestream.find().lean();
+    console.log(liveStreams,"---------liveStreams")
     if (!liveStreams || liveStreams.length === 0) {
       return res.status(404).json({ message: "No live streams found" });
     }

@@ -1,4 +1,4 @@
-export const products = [
+const products = [
   {
     _id: '1',
     name: 'Wireless Headphones',
@@ -748,3 +748,4 @@ export const products = [
     stock:'In Stock',
   },
 ];
+module.exports = products;

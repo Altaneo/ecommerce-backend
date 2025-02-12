@@ -17,7 +17,6 @@ const cartRoutes = require("./routes/cartRoutes");
 const productRoutes = require("./routes/productRoutes");
 const products = require("./Data/Data");
 const Product = require("./models/Product");
-const featureProducts = require("./Data/FeatureData");
 const notificationsRoutes = require("./routes/notificationsRoutes");
 const livestreamRoutes =require("./routes/livestream")
 const selectedProductRoutes = require("./routes/selectedProductRoutes");
@@ -144,10 +143,6 @@ app.get("/api/products", async (req, res) => {
     console.error("Error fetching products:", error);
     res.status(500).json({ message: "Failed to fetch products" });
   }
-});
-
-app.get("/api/featureProducts", (req, res) => {
-  res.json(featureProducts.featureProducts);
 });
 // Set storage engine
 const storage = multer.diskStorage({
