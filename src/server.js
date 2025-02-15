@@ -15,7 +15,6 @@ const path = require("path");
 const authRoutes = require("./routes/auth");
 const cartRoutes = require("./routes/cartRoutes");
 const productRoutes = require("./routes/productRoutes");
-const products = require("./Data/Data");
 const Product = require("./models/Product");
 const notificationsRoutes = require("./routes/notificationsRoutes");
 const livestreamRoutes =require("./routes/livestream")
@@ -116,20 +115,6 @@ const razorpay = new Razorpay({
 });
 
 // Product Saving Function
-const saveProducts = async () => {
-  try {
-    for (const product of products.products) {
-      await Product.findByIdAndUpdate(
-        product._id,
-        { $set: product },
-        { upsert: true, new: true, runValidators: true }
-      );
-    }
-  } catch (err) {
-    console.error("Error saving or updating products:", err);
-  }
-};
-saveProducts();
 
 // API Endpoints
 app.get("/api/products", async (req, res) => {
