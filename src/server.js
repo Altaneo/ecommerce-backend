@@ -84,15 +84,12 @@ app.use((req, res, next) => {
 });
 
 // MongoDB Connection
-mongoose.connect(
-  process.env.MONGODB_URI || "mongodb://localhost:27017/shopApp",
-  {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-    serverSelectionTimeoutMS: 50000, // Increase timeout to 50 seconds
-    socketTimeoutMS: 45000,
-  }
-);
+mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost:27017/shopApp", {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  serverSelectionTimeoutMS: 60000, // 60 seconds
+  socketTimeoutMS: 60000,
+});
 
 app.use(
   session({
