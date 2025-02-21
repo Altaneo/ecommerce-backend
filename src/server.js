@@ -23,25 +23,9 @@ const messageRoutes = require("./routes/messageRoutes");
 const crypto = require("crypto");
 const http = require("http");
 const socketIo = require("socket.io");
-
 dotenv.config();
 
 const app = express();
-// const RedisStore = require("connect-redis").RedisStore;
-// const { createClient } = require("redis");
-
-// // Create Redis client
-// const redisClient = createClient();
-// redisClient.connect().catch(console.error);
-// const sessionMiddleware = session({
-//   store: new RedisStore({ client: redisClient }),
-//   secret: process.env.JWT_SECRET,
-//   resave: false,
-//   saveUninitialized: false,
-//   cookie: { secure: false } // Set to true in production with HTTPS
-// });
-
-// app.use(sessionMiddleware);
 const server = http.createServer(app);
 const io = socketIo(server, {
   cors: {
@@ -201,13 +185,13 @@ app.post("/verify-signature", (req, res) => {
   }
 });
 const oauth2Client = new google.auth.OAuth2(
-  "873468664454-lok0irstn4qfg00r2n6hllgi81buvr3g.apps.googleusercontent.com",
-  "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",
+  process.env.GOOGLE_CLIENT_ID, 
+  process.env.GOOGLE_CLIENT_SECRET,
   "http://localhost:5000/oauth2callback"
 );
 const scopes = [
-  "https://www.googleapis.com/auth/youtube.force-ssl",
-  "https://www.googleapis.com/auth/calendar.readonly",
+  process.env.SCOPE1,
+  process.env.SCOPE2,
 ];
 const state = crypto.randomBytes(32).toString("hex");
 app.get("/auth/youtube", (req, res) => {
@@ -243,9 +227,8 @@ app.get("/oauth2callback", async (req, res) => {
 
 
 
-const YOUTUBE_API_KEY = "AIzaSyDuXur_2n49Y16SeOu_i8b8LdQJgqJQhUw";
-const CHANNEL_ID = "UCoHCXJfVz-iJ4NeseTOZ3Gg";
-
+const YOUTUBE_API_KEY = process.env.YOUTUBE_API_KEY;
+const CHANNEL_ID = process.env.CHANNEL_ID;
 const youtube = google.youtube({ version: "v3", auth: YOUTUBE_API_KEY });
 
 app.get("/api/live-streams", async (req, res) => {
