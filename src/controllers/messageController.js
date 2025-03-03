@@ -2,7 +2,6 @@ const Message = require('../models/Message');
 
 const sendMessage = async (req, res) => {
   const { sender, receiver, content } = req.body;
-
   try {
     const message = await Message.create({ sender, receiver, content });
     res.status(201).json(message);

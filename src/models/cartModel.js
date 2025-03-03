@@ -6,9 +6,19 @@ const reviewSchema = new mongoose.Schema({
   date: { type: Date, default: Date.now },
 });
 const cartSchema = new mongoose.Schema({
-  productId: { type: String, required: true }, // Unique product identifier
-  name: { type: String, required: true },
-  description: { type: String },
+  productId: { type: String, required: true },
+  name: {
+    en: { type: String, required: true },
+    hi: { type: String, required: true },
+    ta: { type: String, required: true },
+    gu: { type: String, required: true },
+  },
+  description: {
+    en: { type: String, required: true },
+    hi: { type: String, required: true },
+    ta: { type: String, required: true },
+    gu: { type: String, required: true },
+  }, // Unique product identifier
   price: { type: Number, required: true },
   image: { type: String, required: true },
   category: { type: String },

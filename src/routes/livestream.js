@@ -10,11 +10,9 @@ const router = express.Router();
 router.post("/add", checkAuthMiddleware, async (req, res) => {
   try {
     const { products, ...livestreamData } = req.body;
-
     if (!products || products.length === 0) {
       return res.status(400).json({ message: "No products provided." });
     }
-
     const user = await User.findOne({
       $or: [{ email: req.user.userId }, { phone: req.user.userId }],
     });
@@ -23,26 +21,25 @@ router.post("/add", checkAuthMiddleware, async (req, res) => {
 
     const savedProducts = await Promise.all(
       products.map(async (p) => {
-        if (!p._id) {
-          return res.status(400).json({ message: "Product _id is required." });
-        }
-
         let existingProduct = await Product.findById(p._id);
         if (!existingProduct) {
-          // Save a new product if it doesn't exist
           existingProduct = new Product(p);
           await existingProduct.save();
         }
-
-        return existingProduct; // Return the existing or newly created product
+        return existingProduct;
       })
     );
 
     const newLivestream = new Livestream({
       ...livestreamData,
       products: savedProducts.map((p) => ({
-        _id: p._id, // Ensures same _id is used in Livestream schema
-        name: p.name,
+
+        name: {
+          gu: p.name?.gu || "",
+          ta: p.name?.ta || "",
+          hi: p.name?.hi || "",
+          en: p.name?.en || "",
+        },
         description: p.description,
         price: p.price,
         type: p.type,
@@ -61,9 +58,12 @@ router.post("/add", checkAuthMiddleware, async (req, res) => {
     res.status(201).json(savedLivestream);
   } catch (error) {
     console.error("Error creating livestream:", error);
-    res.status(500).json({ message: error.message });
+    if (!res.headersSent) {
+      res.status(500).json({ message: error.message });
+    }
   }
 });
+
 router.get("/:streamId", async (req, res) => {
   try {
     const livestream = await Livestream.findOne({ streamId: req.params.streamId });
@@ -79,7 +79,6 @@ router.get("/:streamId", async (req, res) => {
 router.get("/", async (req, res) => {
   try {
     const liveStreams = await Livestream.find().lean();
-    console.log(liveStreams,"---------liveStreams")
     if (!liveStreams || liveStreams.length === 0) {
       return res.status(404).json({ message: "No live streams found" });
     }

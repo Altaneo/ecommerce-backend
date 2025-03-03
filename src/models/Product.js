@@ -1,9 +1,18 @@
 const mongoose = require('mongoose');
 
 const productSchema = new mongoose.Schema({
-  _id: {  type: String, required: true }, // Custom ID (like '10')
-  name: { type: String, required: true },
-  description: { type: String, required: true },
+  name: {
+    en: { type: String, required: true },
+    hi: { type: String, required: true },
+    ta: { type: String, required: true },
+    gu: { type: String, required: true },
+  },
+  description: {
+    en: { type: String, required: true },
+    hi: { type: String, required: true },
+    ta: { type: String, required: true },
+    gu: { type: String, required: true },
+  },
   price: { type: Number, required: true },
   type: { type: String, required: true },
   brand: { type: String, required: true },
@@ -14,8 +23,8 @@ const productSchema = new mongoose.Schema({
   reviews: [
     {
       user: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
-      userName: { type: String},
-      email: { type: String},
+      userName: { type: String },
+      email: { type: String },
       review: { type: String },
       rating: { type: Number, min: 1, max: 5 },
       createdAt: { type: Date, default: Date.now },

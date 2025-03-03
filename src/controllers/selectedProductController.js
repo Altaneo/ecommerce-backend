@@ -3,7 +3,7 @@ const SelectedProduct = require("../models/selectedProduct");
 // Save a selected product
 const saveSelectedProduct = async (req, res) => {
   const {
-    id,
+    _id,
     name,
     description,
     price,
@@ -19,7 +19,7 @@ const saveSelectedProduct = async (req, res) => {
   try {
     // Create a new SelectedProduct document with all the details
     const selectedProduct = new SelectedProduct({
-      id,
+      _id,
       name,
       description,
       price,

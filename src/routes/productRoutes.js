@@ -2,6 +2,7 @@ const express = require('express');
 const Product = require('../models/Product');
 const multer = require("multer");
 const path = require("path");
+const fs = require("fs");
 const userService = require('../services/userService');
 const { checkAuthMiddleware } = require('../controllers/authController');
 const router = express.Router();
@@ -84,18 +85,17 @@ router.post("/add", upload.array("images", 5), async (req, res) => {
       return res.status(400).json({ message: "No products provided." });
     }
 
-    products = JSON.parse(products); // Convert stringified JSON (fixes the issue)
+    products = JSON.parse(products); // Convert stringified JSON
 
-    // Handle image uploads (if needed)
+    // Handle image uploads
     const uploadedImages = req.files ? req.files.map((file) => `/uploads/${file.filename}`) : [];
 
-    // Assign images properly (if uploaded)
+    // Format products correctly
     const formattedProducts = products.map((product, index) => ({
-      _id: product._id || new Date().getTime().toString(),
-      name: product.name,
-      description: product.description,
+      name: product.name, // Keep as an object (for multiple languages)
+      description: product.description, // Keep as an object (for multiple languages)
       price: Number(product.price),
-      stock: product.stock,
+      stock: product.stock ? Number(product.stock) : 0, // Convert stock to number, default to 0 if empty
       type: product.type,
       brand: product.brand,
       image: uploadedImages[index] || product.image || "", // Use uploaded image if available
@@ -114,4 +114,29 @@ router.post("/add", upload.array("images", 5), async (req, res) => {
 });
 
 
+router.delete("/products/:id", async (req, res) => {
+  try {
+    const product = await Product.findById(req.params.id);
+    if (!product) {
+      return res.status(404).json({ message: "Product not found" });
+    }
+    const imagePath = path.join(__dirname, "../..", "uploads", path.basename(product.image));
+    await Product.findByIdAndDelete(req.params.id);
+    if (fs.existsSync(imagePath)) {
+      fs.unlinkSync(imagePath);
+    }
+    res.json({ message: "Product deleted successfully" });
+  } catch (error) {
+    console.error("Error deleting product:", error);
+    res.status(500).json({ message: "Server error" });
+  }
+});
+router.put("/products/:id", async (req, res) => {
+  try {
+    const updatedProduct = await Product.findByIdAndUpdate(req.params.id, req.body, { new: true });
+    res.json(updatedProduct);
+  } catch (error) {
+    res.status(500).json({ message: "Error updating product" });
+  }
+});
 module.exports = router;

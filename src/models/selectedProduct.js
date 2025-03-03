@@ -1,9 +1,19 @@
 const mongoose = require("mongoose");
 
 const selectedProductSchema = new mongoose.Schema({
-  id: { type: String, required: true },
-  name: { type: String },
-  description: { type: String},
+  id: { type: String },
+  name: {
+    en: { type: String, required: true },
+    hi: { type: String, required: true },
+    ta: { type: String, required: true },
+    gu: { type: String, required: true },
+  },
+  description: {
+    en: { type: String, required: true },
+    hi: { type: String, required: true },
+    ta: { type: String, required: true },
+    gu: { type: String, required: true },
+  },
   price: { type: Number },
   type: { type: String },
   brand: { type: String },

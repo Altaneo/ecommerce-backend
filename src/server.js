@@ -23,6 +23,9 @@ const messageRoutes = require("./routes/messageRoutes");
 const crypto = require("crypto");
 const http = require("http");
 const socketIo = require("socket.io");
+const i18nextMiddleware = require("i18next-http-middleware");
+const i18n = require("./i18n");
+const translateRoutes =require("./routes/translate")
 dotenv.config();
 
 const app = express();
@@ -39,24 +42,19 @@ const io = socketIo(server, {
     credentials: true,
   },
 });
-// const wrap = (middleware) => (socket, next) => middleware(socket.request, {}, next);
-// io.use(wrap(sessionMiddleware));
-app.use("/uploads", express.static("uploads")); // Serve images as static files
-
-
-// Middleware
+app.use("/uploads", express.static("uploads"));
 app.use(
   cors({
     origin: [
       "http://localhost:3000",
+      "https://libretranslate.com",
       "http://localhost:5000",
       "http://localhost:3001",
     ],
     credentials: true,
   })
 );
-// app.use(express.json());
-app.use(express.json({ limit: "50mb" })); // Increase payload limit for JSON
+app.use(express.json({ limit: "50mb" }));
 app.use(express.urlencoded({ extended: true, limit: "50mb" })); 
 app.use("/uploads", express.static("uploads"));
 app.use(cookieParser());
@@ -65,15 +63,12 @@ app.use((req, res, next) => {
   res.setHeader("Cross-Origin-Embedder-Policy", "require-corp");
   next();
 });
-
-// MongoDB Connection
 mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost:27017/shopApp", {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   serverSelectionTimeoutMS: 60000, // 60 seconds
   socketTimeoutMS: 60000,
 });
-
 app.use(
   session({
     secret: process.env.JWT_SECRET || "defaultsecret",
@@ -83,8 +78,11 @@ app.use(
     cookie: { secure: false }, // Set to true if using HTTPS
   })
 );
-
-// Routes
+app.use(i18nextMiddleware.handle(i18n));
+app.use("/locales", express.static(path.join(__dirname, "locales")));
+app.get("/api/hello", (req, res) => {
+  res.json({ message: req.t("welcome") });
+});
 app.use("/api/auth", authRoutes);
 app.use("/api/cart", cartRoutes);
 app.use("/api", productRoutes);
@@ -92,15 +90,10 @@ app.use("/notifications", notificationsRoutes);
 app.use("/live", livestreamRoutes);
 app.use("/api/messages", messageRoutes);
 app.use("/api/selected-products", selectedProductRoutes);
-// Razorpay Setup
 const razorpay = new Razorpay({
   key_id: process.env.RAZORPAY_KEY_ID,
   key_secret: process.env.RAZORPAY_KEY_SECRET,
 });
-
-// Product Saving Function
-
-// API Endpoints
 app.get("/api/products", async (req, res) => {
   try {
     const products = await Product.find({});
@@ -110,18 +103,15 @@ app.get("/api/products", async (req, res) => {
     res.status(500).json({ message: "Failed to fetch products" });
   }
 });
-// Set storage engine
 const storage = multer.diskStorage({
   destination: "./uploads/",
   filename: (req, file, cb) => {
     cb(null, `${Date.now()}-${file.originalname}`);
   },
 });
-
-// File upload middleware
 const upload = multer({
   storage: storage,
-  limits: { fileSize: 10 * 1024 * 1024 }, // Limit: 10MB
+  limits: { fileSize: 10 * 1024 * 1024 },
   fileFilter: (req, file, cb) => {
     const fileTypes = /jpeg|jpg|png|gif/;
     const extName = fileTypes.test(path.extname(file.originalname).toLowerCase());
@@ -133,8 +123,6 @@ const upload = multer({
     }
   },
 });
-
-// Upload route
 app.post("/upload", upload.single("profilePicture"), (req, res) => {
   if (!req.file) {
     return res.status(400).json({ success: false, message: "No file uploaded" });
@@ -230,6 +218,7 @@ app.get("/oauth2callback", async (req, res) => {
 const YOUTUBE_API_KEY = process.env.YOUTUBE_API_KEY;
 const CHANNEL_ID = process.env.CHANNEL_ID;
 const youtube = google.youtube({ version: "v3", auth: YOUTUBE_API_KEY });
+app.use("/api", translateRoutes);
 
 app.get("/api/live-streams", async (req, res) => {
   try {
@@ -281,10 +270,11 @@ app.post("/start-stream", upload.single("thumbnail"), async (req, res) => {
 
     oauth2Client.setCredentials(req.session.tokens);
     const youtube = google.youtube("v3");
+    console.log(title.en,description.en,"-----------fff")
     const requestBody = {
       snippet: {
-        title: title || "Default Title",
-        description: description || "Live streaming from my website",
+        title: title.en || "Default Title",
+        description: description.en || "Live streaming from my website",
         scheduledStartTime: isImmediateStart ? new Date().toISOString() : selectedStartTime.toISOString(),
       },
       status: { privacyStatus: "public" },
@@ -302,7 +292,7 @@ app.post("/start-stream", upload.single("thumbnail"), async (req, res) => {
       auth: oauth2Client,
       part: "snippet,cdn",
       requestBody: {
-        snippet: { title: title || "Live Stream" },
+        snippet: { title: title.en || "Live Stream" },
         cdn: {
           format: "1080p",
           ingestionType: "rtmp",
@@ -447,8 +437,6 @@ app.get("/api/get-live-video", async (req, res) => {
       broadcastStatus: "active", // Get only currently live streams
       broadcastType: "all",
     });
-
-    // Filter broadcasts to find the one for the authenticated user
     const liveBroadcasts = response.data.items.filter(broadcast => {
       return broadcast.snippet.channelId === req.session.channelId; // Ensure you store the user's channel ID during authentication
     });
